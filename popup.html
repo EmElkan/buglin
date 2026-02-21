@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+  <style>
+    body {
+      width: 220px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      background: #f9fafb;
+    }
+
+    h1 {
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      color: #111827;
+    }
+
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .toggle-label {
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #d1d5db;
+      transition: 0.2s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.2s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #10b981;
+    }
+
+    input:checked + .slider.word-scanner-slider {
+      background-color: #a855f7;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    .legend {
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .legend h2 {
+      font-size: 13px;
+      margin: 0 0 8px 0;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #374151;
+    }
+
+    .legend-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    .color-high { background: #ef4444; }
+    .color-medium { background: #f59e0b; }
+    .color-low { background: #22c55e; }
+    .color-word { background: #a855f7; }
+
+    .word-list-container {
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .word-list-container.visible {
+      display: block;
+    }
+
+    .word-list-label {
+      display: block;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    #wordListInput {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 60px;
+      margin-bottom: 8px;
+    }
+
+    #wordListInput:focus {
+      outline: none;
+      border-color: #a855f7;
+    }
+
+    #saveWordList {
+      background: #a855f7;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    #saveWordList:hover {
+      background: #9333ea;
+    }
+  </style>
+</head>
+<body>
+  <h1>Buglin</h1>
+
+  <div class="toggle-container">
+    <span class="toggle-label">Autofill Detection</span>
+    <label class="toggle">
+      <input type="checkbox" id="enableToggle" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="toggle-container">
+    <span class="toggle-label">Word Scanner</span>
+    <label class="toggle">
+      <input type="checkbox" id="wordScannerToggle">
+      <span class="slider word-scanner-slider"></span>
+    </label>
+  </div>
+
+  <div class="word-list-container" id="wordListContainer">
+    <label class="word-list-label">Forbidden words (comma-separated)</label>
+    <textarea id="wordListInput" placeholder="partner, partners, group, groups"></textarea>
+    <button id="saveWordList">Save</button>
+  </div>
+
+  <div class="legend">
+    <h2>Risk Levels</h2>
+    <div class="legend-item">
+      <div class="legend-color color-high"></div>
+      <span><strong>High</strong> - Will trigger autofill</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-medium"></div>
+      <span><strong>Medium</strong> - May trigger form history</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-low"></div>
+      <span><strong>Low</strong> - Minimal risk</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color color-word"></div>
+      <span><strong>Word</strong> - Forbidden word found</span>
+    </div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

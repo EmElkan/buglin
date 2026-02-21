@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Buglin",
+  "version": "1.0",
+  "description": "Form testing toolkit: highlights autofill risks and injects test data",
+  "permissions": ["storage", "activeTab", "contextMenus"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["utils.js", "analysis.js", "content.js", "wordscanner.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
