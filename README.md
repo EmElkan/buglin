@@ -6,6 +6,8 @@ A Chrome extension to support the exploratory testing of web forms.
 2. **Test Data Injection** - Right-click context menu to fill fields with test payloads
 3. **Word Scanner** - Scans page content for forbidden words and highlights them
 
+https://github.com/user-attachments/assets/85985732-6db1-4510-9c19-8e308aaa1dcd
+
 ## Installation
 
 1. Open `chrome://extensions`
