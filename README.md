@@ -40,15 +40,6 @@ Scans page text for forbidden words and highlights matches. Pre-configured with:
 
 Matches whole words only (case-insensitive) and rescans when page content changes dynamically.
 
-## Development
-
-```bash
-npm install           # Setup
-npm test              # Run all tests (128 total)
-npm run test:watch    # Watch mode
-npm run test:coverage # Coverage report
-```
-
 ## Acknowledgements
 
 - Inspired by [BugMagnet](https://github.com/gojko/bugmagnet)
