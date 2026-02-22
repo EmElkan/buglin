@@ -38,7 +38,7 @@ Last 5 used payloads appear at the top for quick access.
 
 ## Word Scanner
 
-Scans page text for forbidden words and highlights matches. Pre-configured with: `todo`, `fixme`, `lorem`, `ipsum`, `placeholder`, `tbd`, `example.com`. Customize the word list via the extension popup.
+Scans page text for forbidden words and highlights matches. Pre-configured with: `todo`, `fixme`, `lorem`, `ipsum`, `placeholder`, `tbd`, `example.com`. Customise the word list via the extension popup.
 
 Matches whole words only (case-insensitive) and rescans when page content changes dynamically.
 
